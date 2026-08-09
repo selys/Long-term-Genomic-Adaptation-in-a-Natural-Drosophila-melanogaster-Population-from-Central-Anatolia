@@ -1,0 +1,48 @@
+#!/bin/bash
+#SBATCH -J tajima_26_ps80_verify
+#SBATCH -p hamsi
+#SBATCH -N 1
+#SBATCH -n 56
+#SBATCH --mem=64G
+#SBATCH --time=24:00:00
+#SBATCH --output=/arf/scratch/ssenkal/selin/sekanslar/all_years_26/PI_ANALYSIS_1k_ps80/tajima_verify_%j.out
+#SBATCH --error=/arf/scratch/ssenkal/selin/sekanslar/all_years_26/PI_ANALYSIS_1k_ps80/tajima_verify_%j.err
+
+MPILEUP="/arf/scratch/ssenkal/selin/sekanslar/all_years_26/mega_all_years.mpileup"
+OUT_DIR="/arf/scratch/ssenkal/selin/sekanslar/all_years_26/PI_ANALYSIS_1k_ps80/verify_ps80"
+POPOOLATION="/arf/scratch/ssenkal/selin/programs/popoolation/Variance-sliding.pl"
+
+mkdir -p $OUT_DIR
+
+declare -A SAMPLES
+SAMPLES[1]="2015_06"; SAMPLES[2]="2015_08"; SAMPLES[3]="2015_09"; SAMPLES[4]="2015_10"
+SAMPLES[5]="2016_06"; SAMPLES[6]="2016_08"; SAMPLES[7]="2016_09"; SAMPLES[8]="2016_10"
+SAMPLES[9]="2017_06"; SAMPLES[10]="2017_10"; SAMPLES[11]="2018_06"; SAMPLES[12]="2018_08"
+SAMPLES[13]="2018_09"; SAMPLES[14]="2018_10"; SAMPLES[15]="2019_06"; SAMPLES[16]="2019_08"
+SAMPLES[17]="2019_09"; SAMPLES[18]="2019_10"; SAMPLES[19]="2020_06"; SAMPLES[20]="2020_08"
+SAMPLES[21]="2020_09"; SAMPLES[22]="2020_10"; SAMPLES[23]="2021_06"; SAMPLES[24]="2021_08"
+SAMPLES[25]="2021_09"; SAMPLES[26]="2021_10"
+
+for IDX in $(seq 1 26); do
+    SAMPLE=${SAMPLES[$IDX]}
+    C1=$((4 + (IDX-1)*3))
+    C2=$((5 + (IDX-1)*3))
+    C3=$((6 + (IDX-1)*3))
+
+    awk -v c1=$C1 -v c2=$C2 -v c3=$C3 \
+        '{print $1,$2,$3,$c1,$c2,$c3}' OFS="\t" $MPILEUP | \
+    perl $POPOOLATION \
+        --measure D \
+        --input /dev/stdin \
+        --output ${OUT_DIR}/${SAMPLE}_D_ps80.txt \
+        --window-size 1000 \
+        --step-size 500 \
+        --min-count 2 \
+        --min-coverage 15 \
+        --max-coverage 400 \
+        --min-qual 20 \
+        --pool-size 80 \
+        --fastq-type sanger > /dev/null 2>&1 &
+done
+wait
+echo ">>> Verification run complete: $(date)"
