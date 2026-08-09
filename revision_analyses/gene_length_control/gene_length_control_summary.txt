@@ -1,0 +1,15 @@
+Gene-length confound check
+===========================
+
+Genes analyzed: 14156 
+
+Test 1 - raw count vs length (Spearman rho, p):
+  rho = 0.1861, p = 1.8e-110
+
+Test 2 - proportion significant vs length (Spearman rho, p):
+  rho = 0.0755, p = 2.3e-19
+
+Test 3 - Poisson regression coefficient on log(length), offset=log(n_tested):
+               Estimate  Std. Error     z value     Pr(>|z|)
+(Intercept) -6.32511056 0.036855739 -171.618062 0.000000e+00
+log_length   0.02370186 0.004361111    5.434821 5.485146e-08

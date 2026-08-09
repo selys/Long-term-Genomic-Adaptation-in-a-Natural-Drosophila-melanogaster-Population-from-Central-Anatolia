@@ -1,0 +1,20 @@
+Is pairwise FST time-dependent? Mantel test
+=============================================
+
+Cohorts: 25 (2015_09 excluded)
+Valid pairwise comparisons: 300 
+
+Mantel test, PEARSON (linear relationship):
+  Observed Mantel r = 0.1585
+  Permutation p-value (n=9,999, one-sided) = 0.0612
+
+Mantel test, SPEARMAN (rank-based; more appropriate if the pattern is
+peak-driven / non-linear rather than a smooth monotonic increase):
+  Observed Mantel rho = 0.2371
+  Permutation p-value (n=9,999, one-sided) = 0.0033
+
+Descriptive regression (FST ~ temporal distance in years) -- for effect
+size / interpretability only; the Mantel p-values above are the valid
+significance tests given non-independence among pairwise FST values:
+  slope = 0.00114 FST per year of separation
+  R^2 = 0.0251

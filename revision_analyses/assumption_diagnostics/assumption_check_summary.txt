@@ -1,0 +1,18 @@
+Parametric assumption diagnostics
+==================================
+
+Residual normality (Shapiro-Wilk on lm(AF ~ Year) residuals):
+  % of SNPs with Shapiro p < 0.05 (non-normal residuals): 32.6%
+
+Concordance between parametric (lm) and non-parametric tests, at q<0.05:
+  lm-significant SNPs:        2167 / 3988
+  Kruskal-significant SNPs:   0 / 3988
+  Spearman-significant SNPs:  2183 / 3988
+  Agreement lm vs Kruskal (both sig or both non-sig): 45.6%
+  Agreement lm vs Spearman (both sig or both non-sig): 98.4%
+
+Breakdown by SNP group (random background vs year-significant):
+   snp_group     n pct_nonnormal_resid pct_lm_sig pct_kruskal_sig
+      <char> <int>               <num>      <num>           <num>
+1:  year_sig  2000                11.8      100.0               0
+2:    random  1988                53.4        8.4               0

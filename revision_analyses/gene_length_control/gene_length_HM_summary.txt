@@ -1,0 +1,29 @@
+Gene-length confound check -- HIGH/MODERATE (GO-enrichment) SNP set only
+==========================================================================
+
+Genes analyzed (HIGH/MODERATE universe): 11063 
+
+Test 1 - raw HIGH/MODERATE count vs length (Spearman rho, p):
+  rho = 0.0951, p = 1.24e-23
+
+Test 2 - proportion significant (HIGH/MODERATE) vs length (Spearman rho, p):
+  rho = 0.0933, p = 7.78e-23
+
+Test 3 - Poisson regression coefficient on log(length), offset=log(n_tested_HM):
+               Estimate Std. Error    z value      Pr(>|z|)
+(Intercept) -6.80914094 0.29921777 -22.756473 1.238146e-114
+log_length   0.09565636 0.03458481   2.765849  5.677480e-03
+
+--------------------------------------------------------------------
+Direct test: are the 395 candidate genes (year-sig
+HIGH/MODERATE) systematically LONGER than the rest of the autosomal genome?
+  Median length, candidate genes:   3638 bp
+  Median length, background genes:  1642 bp
+  Wilcoxon rank-sum test:
+
+	Wilcoxon rank sum test with continuity correction
+
+data:  length_bp by is_candidate
+W = 1607700, p-value < 2.2e-16
+alternative hypothesis: true location shift is not equal to 0
+

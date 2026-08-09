@@ -1,0 +1,29 @@
+FST ~ PC1 + PC2 model (n = 22 )
+
+Call:
+lm(formula = MeanFST ~ PC1 + PC2, data = climate_fst)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.011695 -0.003131 -0.001428  0.001703  0.021947 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 0.0311782  0.0016631  18.747 1.03e-13 ***
+PC1         0.0013858  0.0006300   2.200   0.0404 *  
+PC2         0.0011931  0.0009974   1.196   0.2463    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.007801 on 19 degrees of freedom
+Multiple R-squared:  0.2481,	Adjusted R-squared:  0.1689 
+F-statistic: 3.135 on 2 and 19 DF,  p-value: 0.06661
+
+
+Shapiro-Wilk test on residuals:
+
+	Shapiro-Wilk normality test
+
+data:  residuals(lm_pc)
+W = 0.90959, p-value = 0.04643
+
